@@ -1,0 +1,32 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Django Challenges{% endblock %}</title>
+    <style>
+        body { font-family: system-ui, sans-serif; max-width: 720px; margin: 2rem auto; padding: 0 1rem; background: #f7f7f8; color: #1f2933; }
+        header a { color: #0b5fff; text-decoration: none; font-weight: 600; }
+        .card { background: #fff; border: 1px solid #e3e6ea; border-radius: 8px; padding: 1rem 1.25rem; margin-bottom: 1rem; }
+        .solved { border-left: 4px solid #2f9e44; }
+        .points { color: #6b7280; font-size: .9rem; }
+        .messages { list-style: none; padding: 0; }
+        .messages li { padding: .6rem .9rem; border-radius: 6px; margin-bottom: .5rem; }
+        .messages .success { background: #e6f4ea; color: #1e6b32; }
+        .messages .error { background: #fdecea; color: #a61b1b; }
+        input[type=text] { padding: .55rem; width: 100%; max-width: 320px; border: 1px solid #cbd2d9; border-radius: 6px; }
+        button { padding: .55rem 1rem; border: 0; border-radius: 6px; background: #0b5fff; color: #fff; cursor: pointer; }
+        button:hover { background: #0848c4; }
+    </style>
+</head>
+<body>
+    <header><a href="{% url 'home:challenge_list' %}">Django Challenges</a></header>
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}<li class="{{ message.tags }}">{{ message }}</li>{% endfor %}
+        </ul>
+    {% endif %}
+    {% block content %}{% endblock %}
+</body>
+</html>

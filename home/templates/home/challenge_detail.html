@@ -1,0 +1,23 @@
+{% extends 'home/base.html' %}
+
+{% block title %}{{ challenge.title }}{% endblock %}
+
+{% block content %}
+<div class="card {% if is_solved %}solved{% endif %}">
+    <h1>{{ challenge.title }}</h1>
+    <p>{{ challenge.description|linebreaks }}</p>
+    <p class="points">{{ challenge.points }} points</p>
+
+    {% if is_solved %}
+        <p><strong>Solved!</strong> Nice work.</p>
+    {% else %}
+        <form method="post">
+            {% csrf_token %}
+            <p><label for="flag">Submit the flag:</label></p>
+            <p><input type="text" id="flag" name="flag" placeholder="django{...}" autocomplete="off" required></p>
+            <button type="submit">Submit</button>
+        </form>
+    {% endif %}
+</div>
+<p><a href="{% url 'home:challenge_list' %}">&larr; Back to challenges</a></p>
+{% endblock %}
